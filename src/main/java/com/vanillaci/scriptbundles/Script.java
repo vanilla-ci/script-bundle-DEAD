@@ -17,7 +17,18 @@ public class Script implements Serializable {
 	private final Manifest manifest;
 
 	public static Script forDirectory(File bundleDirectory) throws IOException {
+		if(!bundleDirectory.exists()) {
+			throw new FileNotFoundException("Bundle directory doesn't exist: " + bundleDirectory.getAbsolutePath());
+		}
+		if(!bundleDirectory.isDirectory()) {
+			throw new FileNotFoundException("Bundle directory must be a directory: " + bundleDirectory.getAbsolutePath());
+		}
+
 		File manifestFile = new File(bundleDirectory, "manifest.json");
+		if(!manifestFile.exists() || !manifestFile.isFile()) {
+			throw new FileNotFoundException("Bundle directory must contain a manifest.json file at the given path: " + manifestFile.getAbsolutePath() + ". See documentation for more information.");
+		}
+
 		Manifest manifest = JsonUtil.parseJson(manifestFile, Manifest.TYPE_REFERENCE);
 		return new Script(bundleDirectory, manifest);
 	}

@@ -17,7 +17,7 @@ public class JsonUtil {
 		return mapper.readValue(jsonFile, typeReference);
 	}
 
-	public static <T> void serialize(T object, OutputStream outputStream) throws IOException {
+	public static <T> void serialize(@NotNull T object, @NotNull OutputStream outputStream) throws IOException {
 		mapper.writeValue(outputStream, object);
 	}
 }

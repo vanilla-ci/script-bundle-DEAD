@@ -27,11 +27,11 @@ public class Environment {
 		}
 	}
 
-	public void addEnvironmentVariable(String name, String value) {
+	public void addEnvironmentVariable(@NotNull String name, @NotNull String value) {
 		environment.put(name, value);
 	}
 
-	public void removeEnvironmentVariable(String name) {
+	public void removeEnvironmentVariable(@NotNull String name) {
 		environment.remove(name);
 	}
 

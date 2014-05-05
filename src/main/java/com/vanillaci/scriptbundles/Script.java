@@ -16,7 +16,7 @@ public class Script implements Serializable {
 	@NotNull
 	private final Manifest manifest;
 
-	public static Script forDirectory(File bundleDirectory) throws IOException {
+	public static Script forDirectory(@NotNull File bundleDirectory) throws IOException {
 		if(!bundleDirectory.exists()) {
 			throw new FileNotFoundException("Bundle directory doesn't exist: " + bundleDirectory.getAbsolutePath());
 		}

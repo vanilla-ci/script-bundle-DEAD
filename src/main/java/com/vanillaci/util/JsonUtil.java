@@ -3,6 +3,7 @@ package com.vanillaci.util;
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.type.*;
+import org.jetbrains.annotations.*;
 
 import java.io.*;
 
@@ -12,7 +13,7 @@ import java.io.*;
 public class JsonUtil {
 	private static ObjectMapper mapper = new ObjectMapper();
 
-	public static <T> T parseJson(File jsonFile, TypeReference<T> typeReference) throws IOException {
+	public static <T> T parseJson(@NotNull File jsonFile, @NotNull TypeReference<T> typeReference) throws IOException {
 		return mapper.readValue(jsonFile, typeReference);
 	}
 }

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "hello from bundle1"
+
+exit 0

@@ -53,6 +53,7 @@ public class Script implements Serializable {
 		}
 
 		Map<String,String> processEnvironment = processBuilder.environment();
+		processEnvironment.put("BUNDLE_DIR", bundleDirectory.getAbsolutePath());
 		processEnvironment.putAll(environment.toMap());
 
 		Process process = processBuilder.start();

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "$BUNDLE_DIR"
+
+exit $SOME_EXIT_CODE

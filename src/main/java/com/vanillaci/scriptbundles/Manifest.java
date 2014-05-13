@@ -41,4 +41,26 @@ public class Manifest implements Serializable {
 	public String getMain() {
 		return main;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Manifest manifest = (Manifest) o;
+
+		if (!main.equals(manifest.main)) return false;
+		if (!name.equals(manifest.name)) return false;
+		if (!version.equals(manifest.version)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = name.hashCode();
+		result = 31 * result + version.hashCode();
+		result = 31 * result + main.hashCode();
+		return result;
+	}
 }

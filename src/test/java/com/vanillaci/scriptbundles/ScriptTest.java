@@ -22,7 +22,8 @@ public class ScriptTest {
 		File tempFile = File.createTempFile("test", "tmp");
 		tempFile.deleteOnExit();
 
-		int exitCode = script.execute(new File("."), new Environment(), tempFile);
+		Process process = script.execute(new File("."), new Environment(), tempFile);
+		int exitCode = process.waitFor();
 
 		Assert.assertEquals(0, exitCode);
 
@@ -48,7 +49,8 @@ public class ScriptTest {
 
 		Environment environment = new Environment();
 		environment.addEnvironmentVariable("SOME_EXIT_CODE", "137");
-		int exitCode = script.execute(new File("."), environment, tempFile);
+		Process process = script.execute(new File("."), environment, tempFile);
+		int exitCode = process.waitFor();
 
 		Assert.assertTrue(tempFile.exists());
 		try(Scanner scanner = new Scanner(tempFile)) {

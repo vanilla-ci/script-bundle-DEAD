@@ -40,11 +40,7 @@ public class Script implements Serializable {
 		this.manifest = manifest;
 	}
 
-	public int execute(@NotNull File workingDirectory, @NotNull Environment environment) throws IOException, InterruptedException {
-		return execute(workingDirectory, environment, null);
-	}
-
-	public int execute(@NotNull File workingDirectory, @NotNull Environment environment, @Nullable File outputFile) throws IOException, InterruptedException {
+	public Process execute(@NotNull File workingDirectory, @NotNull Environment environment, @Nullable File outputFile) throws IOException, InterruptedException {
 		String mainFile = manifest.getMain();
 		if(OS.getOS() == OS.WINDOWS) {
 			mainFile = mainFile + ".bat";
@@ -56,7 +52,6 @@ public class Script implements Serializable {
 		executable.setExecutable(true);
 
 		ProcessBuilder processBuilder = new ProcessBuilder(executable.getPath())
-			.redirectErrorStream(true)
 			.directory(workingDirectory);
 
 		if(outputFile == null) {
@@ -69,13 +64,7 @@ public class Script implements Serializable {
 		processEnvironment.put("BUNDLE_DIR", bundleDirectory.getAbsolutePath());
 		processEnvironment.putAll(environment.toMap());
 
-		Process process = processBuilder.start();
-		try {
-			return process.waitFor();
-		} catch (InterruptedException e) {
-			process.destroy();
-			throw e;
-		}
+		return processBuilder.start();
 	}
 
 	@NotNull

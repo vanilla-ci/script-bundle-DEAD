@@ -31,6 +31,10 @@ public class Environment {
 		environment.put(name, value);
 	}
 
+	public void addEnvironmentVariables(@NotNull Map<String, String> variables) {
+		environment.putAll(variables);
+	}
+
 	public void removeEnvironmentVariable(@NotNull String name) {
 		environment.remove(name);
 	}
